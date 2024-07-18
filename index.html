@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRX Coin Clicker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <script async src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="main">
+            <p id="user-name" class="user-name"></p> <!-- Поле для имени пользователя -->
+            <p id="coin-count" class="count-text">0 TRX</p>
+            <div class="coin-display">
+                <div class="glow-circle"></div>
+                <img src="icons/trx-icon.png" alt="TRX Coin" id="click-icon" class="coin-icon">
+            </div>
+            <div id="animation-container"></div>
+            <p id="trophy" class="trophy">Bronze</p>
+            <div class="energy-container">
+                <p>Энергия: <span id="energy-count">1000</span>/1000</p>
+                <div class="energy-bar">
+                    <div id="energy-bar-fill" class="energy-bar-fill"></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <button id="shop-button" class="footer-button">Shop</button>
+        </div>
+    </div>
+
+    <div id="shop-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-shop" class="close">&times;</span>
+            <h2>Shop</h2>
+            <button id="upgrade-click" class="shop-button">Upgrade Click (Cost: 50 TRX)</button>
+            <button id="upgrade-energy" class="shop-button">Upgrade Energy (Cost: 100 TRX)</button> <!-- Добавлена кнопка для прокачки энергии -->
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
