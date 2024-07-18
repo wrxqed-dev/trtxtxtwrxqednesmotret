@@ -35,13 +35,6 @@ body {
     box-sizing: border-box;
 }
 
-.user-name {
-    font-size: 24px;
-    color: #FFFFFF;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
 .count-text {
     font-size: 32px;
     color: #FFFFFF;
@@ -74,8 +67,6 @@ body {
     height: 120px;
     cursor: pointer;
     transition: transform 0.1s;
-    outline: none; /* Убирает синий квадрат на моб. устройствах */
-    -webkit-tap-highlight-color: transparent; /* Убирает серый квадрат на моб. устройствах */
 }
 
 .coin-icon:active {
@@ -204,4 +195,18 @@ body {
 
 .shop-button:hover {
     background-color: #FFC107;
+}
+
+.user-info {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.1); /* Прозрачный белый фон */
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+.user-name {
+    font-size: 18px;
+    color: #FFD700;
 }
