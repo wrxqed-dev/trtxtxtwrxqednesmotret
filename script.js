@@ -26,39 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set initial user name
     tg.ready(() => {
         userName.textContent = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.first_name : 'User';
-        loadGameState(); // Load game state when Telegram WebApp is ready
     });
-
-    function saveGameState() {
-        const gameState = {
-            coin,
-            energy,
-            maxEnergyValue,
-            energyRegenRate,
-            clickValue,
-            upgradeClickCost,
-            upgradeEnergyCost,
-            upgradeSpeedCost
-        };
-        localStorage.setItem('gameState', JSON.stringify(gameState));
-    }
-
-    function loadGameState() {
-        const savedGameState = localStorage.getItem('gameState');
-        if (savedGameState) {
-            const gameState = JSON.parse(savedGameState);
-            coin = gameState.coin;
-            energy = gameState.energy;
-            maxEnergyValue = gameState.maxEnergyValue;
-            energyRegenRate = gameState.energyRegenRate;
-            clickValue = gameState.clickValue;
-            upgradeClickCost = gameState.upgradeClickCost;
-            upgradeEnergyCost = gameState.upgradeEnergyCost;
-            upgradeSpeedCost = gameState.upgradeSpeedCost;
-            updateCoinDisplay();
-            updateEnergyDisplay();
-        }
-    }
 
     function updateCoinDisplay() {
         coinCount.textContent = `${coin} TRX`;
@@ -78,6 +46,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function saveProgress() {
+        const progress = {
+            coin,
+            energy,
+            maxEnergyValue,
+            energyRegenRate,
+            clickValue,
+            upgradeClickCost,
+            upgradeEnergyCost,
+            upgradeSpeedCost
+        };
+        localStorage.setItem('clickerProgress', JSON.stringify(progress));
+    }
+
+    function loadProgress() {
+        const savedProgress = JSON.parse(localStorage.getItem('clickerProgress'));
+        if (savedProgress) {
+            coin = savedProgress.coin;
+            energy = savedProgress.energy;
+            maxEnergyValue = savedProgress.maxEnergyValue;
+            energyRegenRate = savedProgress.energyRegenRate;
+            clickValue = savedProgress.clickValue;
+            upgradeClickCost = savedProgress.upgradeClickCost;
+            upgradeEnergyCost = savedProgress.upgradeEnergyCost;
+            upgradeSpeedCost = savedProgress.upgradeSpeedCost;
+
+            upgradeClick.textContent = `Upgrade Click (Cost: ${upgradeClickCost} TRX)`;
+            upgradeEnergy.textContent = `Upgrade Max Energy (Cost: ${upgradeEnergyCost} TRX)`;
+            upgradeSpeed.textContent = `Upgrade Energy Speed (Cost: ${upgradeSpeedCost} TRX)`;
+
+            updateCoinDisplay();
+            updateEnergyDisplay();
+        }
+    }
+
+    loadProgress();
+
     setInterval(regenerateEnergy, 1000);
 
     clickIcon.addEventListener('click', () => {
@@ -86,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
             energy -= clickValue;
             updateCoinDisplay();
             updateEnergyDisplay();
-            saveGameState(); // Save game state on click
+            saveProgress();
 
             const animation = document.createElement('div');
             animation.className = 'coin-animation';
@@ -114,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             upgradeClickCost *= 2;
             upgradeClick.textContent = `Upgrade Click (Cost: ${upgradeClickCost} TRX)`;
             updateCoinDisplay();
-            saveGameState(); // Save game state on upgrade
+            saveProgress();
         }
     });
 
@@ -126,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             upgradeEnergy.textContent = `Upgrade Max Energy (Cost: ${upgradeEnergyCost} TRX)`;
             updateCoinDisplay();
             updateEnergyDisplay();
-            saveGameState(); // Save game state on upgrade
+            saveProgress();
         }
     });
 
@@ -137,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
             upgradeSpeedCost *= 2;
             upgradeSpeed.textContent = `Upgrade Energy Speed (Cost: ${upgradeSpeedCost} TRX)`;
             updateCoinDisplay();
-            saveGameState(); // Save game state on upgrade
+            saveProgress();
         }
     });
 
@@ -147,3 +152,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// Генерация пальм по центру экрана
+function generatePalmTrees() {
+    const movingImages = document.querySelector('.moving-images');
+    movingImages.innerHTML = ''; // Очищаем контейнер перед добавлением новых пальм
+
+    for (let i = 0; i < 10; i++) {
+        const palmTree = document.createElement('span');
+        palmTree.textContent = '🌴';
+        palmTree.className = 'moving-image';
+        palmTree.style.left = `${Math.random() * 100}%`;
+        palmTree.style.top = `${Math.random() * 100}%`;
+        movingImages.appendChild(palmTree);
+    }
+}
+
+generatePalmTrees();

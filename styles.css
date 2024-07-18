@@ -290,3 +290,12 @@ body {
 .shop-button:hover {
     background: linear-gradient(120deg, #feb47b, #ff7e5f, #86a8e7);
 }
+
+.moving-image {
+    position: absolute;
+    font-size: 50px;
+    animation: move 10s linear infinite;
+    opacity: 0.5;
+    filter: blur(2px);
+    transform: translate(-50%, -50%);
+}
